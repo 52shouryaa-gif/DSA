@@ -7,13 +7,9 @@ public:
             mpp[nums[i]++];
         }
         while(true){
-        if(mpp.find(k*cnt)!=mpp.end()){
-         cnt++;
-        }
-        else{
-         
-         return cnt*k;
-        }
+        if(mpp.find(k*cnt)!=mpp.end())cnt++;
+        else return cnt*k;
+        
         }
         return 0;
     }
