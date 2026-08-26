@@ -9,7 +9,7 @@ public:
         int count = 0;
         int current_sum = 0;
        
-        unordered_map<int, int> prefix_map;
+        map<int, int> prefix_map;
         prefix_map[0] = 1;
         
         for (int i = 0; i < nums.size(); i++) {
