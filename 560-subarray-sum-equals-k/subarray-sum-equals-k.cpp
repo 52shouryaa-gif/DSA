@@ -14,13 +14,8 @@ public:
         
         for (int i = 0; i < nums.size(); i++) {
             current_sum += nums[i];
-            
-            // If (current_sum - k) exists in the map, it means we found a subarray
-            if (prefix_map.find(current_sum - k) != prefix_map.end()) {
-                count += prefix_map[current_sum - k];
-            }
-            
-            // Add the current prefix sum to the map for future iterations
+            int remove = current_sum-k;
+            count+=prefix_map[remove];
             prefix_map[current_sum]++;
         }
         
