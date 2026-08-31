@@ -8,7 +8,6 @@ int findays(vector<int>& nums , int mid){
             load = nums[i];
             cnt++;
         }
-
         else load += nums[i];
     }
     return cnt;
