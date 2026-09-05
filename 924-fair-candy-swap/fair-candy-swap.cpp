@@ -1,19 +1,25 @@
+#include <vector>
+#include <unordered_set>
+using namespace std;
+
 class Solution {
 public:
-    vector<int> fairCandySwap(vector<int>& aliceSizes, vector<int>& bobSizes) {
-        int al = 0;
-        int bl = 0;
-        for(int it:aliceSizes) al+= it;
-        for(int it:bobSizes) bl+= it;
+    vector<int> fairCandySwap(vector<int>& alice, vector<int>& bob) {
+        int sumA = 0, sumB = 0;
         
-        int diff = (bl - al)/2;
+        for (int a : alice) sumA += a;
+        for (int b : bob) sumB += b;
         
-        unordered_set<int> mpp(bobSizes.begin() , bobSizes.end());
-        for(auto it :aliceSizes){
-          if(mpp.count(it + diff)){
-            return {it , it+diff};
-          }
+        int diff = (sumB - sumA) / 2;
+        
+        unordered_set<int> setB(bob.begin(), bob.end());
+        
+        for (int a : alice) {
+            if (setB.count(a + diff)) {
+                return {a, a + diff};
+            }
         }
+        
         return {};
     }
 };
