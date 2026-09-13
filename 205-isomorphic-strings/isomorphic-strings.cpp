@@ -1,18 +1,23 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-      map<char , char> mp;
-      map<char , char> mpp;
-     for(int i = 0 ; i< s.length(); i++){
-        if(mp.count(s[i]) && mp[s[i]]!= t[i]) return false;
-         if(mpp.count(t[i]) && mpp[t[i]]!= s[i]) return false;
-         mp[s[i]] = t[i];
-         mpp[t[i]] = s[i];
-     }
-     return true;
+        unordered_map<char, int> charIndexS;
+        unordered_map<char, int> charIndexT;
 
-     if(mp.size()==mpp.size()) return true;
-     return false;
-        
+        for (int i = 0; i < s.length(); i++) {
+            if (charIndexS.find(s[i]) == charIndexS.end()) {
+                charIndexS[s[i]] = i;
+            }
+
+            if (charIndexT.find(t[i]) == charIndexT.end()) {
+                charIndexT[t[i]] = i;
+            }
+
+            if (charIndexS[s[i]] != charIndexT[t[i]]) {
+                return false;
+            }
+        }
+
+        return true;        
     }
 };
