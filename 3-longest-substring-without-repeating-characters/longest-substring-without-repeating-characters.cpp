@@ -6,15 +6,15 @@ public:
         int cnt = 0;
         int maxi = 0;
         int n = s.size();
-        unordered_set<char> mpp;
-
-        while (r < n) {
-            while (mpp.find(s[r]) != mpp.end()) {
-                mpp.erase(s[l]);
-                l++;
+       vector<int> mpp(256, -1);
+        while(r<n){
+          if (mpp[s[r]]!=-1){ 
+            if(mpp[s[r]]>=l) {
+                l = mpp[s[r]] + 1;             
             }
-            mpp.insert(s[r]);
-            maxi = max(r - l + 1, maxi);
+          }
+            mpp[s[r]] = r;
+            maxi = max(r-l+1 , maxi);
             r++;
         }
         return maxi;
