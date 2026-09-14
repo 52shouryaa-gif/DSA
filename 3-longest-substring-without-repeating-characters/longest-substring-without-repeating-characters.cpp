@@ -8,13 +8,13 @@ public:
         int n = s.size();
         unordered_set<char> mpp;
 
-        while(r<n){
-          while (mpp.find(s[r]) != mpp.end()) {
+        while (r < n) {
+            while (mpp.find(s[r]) != mpp.end()) {
                 mpp.erase(s[l]);
-                l++;  
+                l++;
             }
-       mpp.insert(s[r]);
-            maxi = max(r-l+1 , maxi);
+            mpp.insert(s[r]);
+            maxi = max(r - l + 1, maxi);
             r++;
         }
         return maxi;
