@@ -11,8 +11,7 @@ public:
             mpp[z[r]]++;
             if (mpp.size() > k) {
                 mpp[z[l]]--;
-                if (mpp[z[l]] == 0)
-                    mpp.erase(z[l]);
+                if (mpp[z[l]] == 0) mpp.erase(z[l]);
                 l++;
             }
             if (mpp.size() <= k) {
