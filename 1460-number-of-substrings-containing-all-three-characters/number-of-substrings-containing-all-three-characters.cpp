@@ -7,21 +7,21 @@ public:
         int n = s.size();
         int totalSubstrings = 0;
 
-        int mpp[256] = {0}; // Array acts as a lightning-fast map for characters
+        int mpp[3] = {0}; // array acts as a lightning-fast map for characters
         int distinct_count = 0; // Tracks the current map size
 
         while (r < n) {
             // If we are seeing this character for the first time in the window
-            if (mpp[s[r]] == 0) {
+            if (mpp[s[r] - 'a'] == 0) {
                 distinct_count++;
             }
-            mpp[s[r]]++;
+            mpp[s[r] - 'a']++;
 
             // Shrink window if we exceed 'k' distinct characters
             while (distinct_count > k) {
-                mpp[s[l]]--;
+                mpp[s[l] - 'a']--;
                 // If the character count drops to 0, it's completely removed from our window
-                if (mpp[s[l]] == 0) {
+                if (mpp[s[l] - 'a'] == 0) {
                     distinct_count--;
                 }
                 l++;
