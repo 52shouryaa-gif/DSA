@@ -1,32 +1,40 @@
 class Solution {
 public:
-int sum(vector<int> s, int k) {
+    int sum(const vector<int>& nums, int k) {
         int l = 0;
         int r = 0;
-        int n = s.size();
-        int maxlen = 0;
+        int n = nums.size();
+        int totalSubarrays = 0; 
 
-        unordered_map<int, int> mpp;
+       
+        vector<int> mpp(n + 1, 0); 
+        int distinct_count = 0;
+
         while (r < n) {
-            mpp[s[r]]++;
-            while (mpp.size() > k) {
-                mpp[s[l]]--;
-                if (mpp[s[l]] == 0){
-                    mpp.erase(s[l]);
+           
+            if (mpp[nums[r]] == 0) {
+                distinct_count++;
+            }
+            mpp[nums[r]]++;
+
+            while (distinct_count > k) {
+                mpp[nums[l]]--;
+               
+                if (mpp[nums[l]] == 0) {
+                    distinct_count--;
                 }
                 l++;
             }
-            maxlen += r - l + 1;
+            
+           
+            totalSubarrays += r - l + 1;
             r++;
         }
-        return maxlen;
+        return totalSubarrays;
     }
   
     int subarraysWithKDistinct(vector<int>& nums, int k) {
-         int a = sum(nums, k);
-        int b = sum(nums, k-1);
-        return a - b;
+        
+        return sum(nums, k) - sum(nums, k - 1);
     }
 };
-
-    
