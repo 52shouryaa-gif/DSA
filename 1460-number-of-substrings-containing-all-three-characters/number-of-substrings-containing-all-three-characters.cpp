@@ -1,29 +1,38 @@
 class Solution {
 public:
-    int sum(string s, int k) {
+    // Pass by const reference to avoid copying the string
+    int sum(const string& s, int k) {
         int l = 0;
         int r = 0;
         int n = s.size();
-        int maxlen = 0;
+        int totalSubstrings = 0;
 
-        unordered_map<char, int> mpp;
+        int mpp[256] = {0}; // Array acts as a lightning-fast map for characters
+        int distinct_count = 0; // Tracks the current map size
+
         while (r < n) {
+            // If we are seeing this character for the first time in the window
+            if (mpp[s[r]] == 0) {
+                distinct_count++;
+            }
             mpp[s[r]]++;
-            while (mpp.size() > k) {
+
+            // Shrink window if we exceed 'k' distinct characters
+            while (distinct_count > k) {
                 mpp[s[l]]--;
-                if (mpp[s[l]] == 0){
-                    mpp.erase(s[l]);
+                // If the character count drops to 0, it's completely removed from our window
+                if (mpp[s[l]] == 0) {
+                    distinct_count--;
                 }
                 l++;
             }
-            maxlen += r - l + 1;
+            totalSubstrings += r - l + 1;
             r++;
         }
-        return maxlen;
+        return totalSubstrings;
     }
+    
     int numberOfSubstrings(string s) {
-        int a = sum(s, 3);
-        int b = sum(s, 2);
-        return a - b;
+        return sum(s, 3) - sum(s, 2);
     }
 };
