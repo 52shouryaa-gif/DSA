@@ -19,7 +19,7 @@ public:
             if (ratings[i] > ratings[i + 1]) {
                 cur++;
             } else
-                cur = 1;
+               { cur = 1;}
             cnt += max(cur, arr[i]);
         }
 
