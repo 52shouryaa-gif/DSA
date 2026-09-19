@@ -4,31 +4,31 @@ public:
 
         sort(nums.begin(), nums.end());
 
-        int left = 0;
+        int l = 0;
+        long long cost = 0;
+        int maxi = 0;
+        int r = 0;
         long long sum = 0;
-        int ans = 0;
+        int n = nums.size();
 
-        for (int right = 0; right < nums.size(); right++) {
+        while (r < n) {
 
-            sum += nums[right];
+            sum += nums[r];
 
-            long long target = nums[right];
-            long long windowSize = right - left + 1;
-
-            long long cost = target * windowSize - sum;
+            cost = 1LL * (r - l + 1) * nums[r] - sum;
 
             while (cost > k) {
+                sum -= nums[l];
+                l++;
 
-                sum -= nums[left];
-                left++;
-
-                windowSize = right - left + 1;
-                cost = target * windowSize - sum;
+                cost = 1LL * (r - l + 1) * nums[r] - sum;
             }
 
-            ans = max(ans, (int)windowSize);
+            maxi = max(r - l + 1, maxi);
+
+            r++;
         }
 
-        return ans;
+        return maxi;
     }
 };
