@@ -1,29 +1,26 @@
 class Solution {
 public:
     vector<int> nextGreaterElements(vector<int>& nums) {
-        int originalSize = nums.size();
-
-        nums.insert(nums.end(), nums.begin(), nums.end());
-
         int n = nums.size();
 
         stack<int> st;
         vector<int> ng(n, -1);
 
-        for(int i = n - 1; i >= 0; i--) {
+        for(int i = 2*n - 1; i >= 0; i--) {
+            int x = nums[i%n];
 
-            while(!st.empty() && nums[i] >= st.top())
+            while(!st.empty() && x >= st.top())
                 st.pop();
 
             if(st.empty())
-                ng[i] = -1;
+                ng[i%n] = -1;
             else
-                ng[i] = st.top();
+                ng[i%n] = st.top();
 
-            st.push(nums[i]);
+            st.push(nums[i%n]);
         }
 
-        ng.resize(originalSize);
+      
 
         return ng;
     }
