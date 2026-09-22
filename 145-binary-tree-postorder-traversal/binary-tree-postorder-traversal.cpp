@@ -10,16 +10,18 @@
  * };
  */
 class Solution {
-public: vector<int>pre;
-    vector<int> postorderTraversal(TreeNode* root) {
-    
-        if(!root) return {};
-        
+public: 
 
-        postorderTraversal(root -> left);
-        postorderTraversal(root->right);
-        pre.push_back(root->val);
+    vector<int> solve(TreeNode* root,vector<int>&pre ) {
+       if(!root) return {};
+        solve(root->left, pre);
+        solve(root -> right , pre);
+        pre.push_back(root -> val);
         return pre;
+    }
+    vector<int> postorderTraversal(TreeNode* root) {
+    vector<int> pre;
+        return solve(root, pre);
 
 
     }
