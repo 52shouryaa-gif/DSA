@@ -1,15 +1,17 @@
 class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
-        unordered_map<int, int> mpp;
-        for (auto it : nums) {
-            mpp[it]++;
+        long long x = 0;
+        for(long long i = 0 ; i < nums.size() ; i++){
+          x = x^nums[i];
         }
-        vector<int> n;
-        for (auto it : mpp) {
-            if (it.second == 1)
-                n.push_back(it.first);
+        long long rightm = x&(-x);
+        int b = 0; 
+        int c = 0;
+        for(long long i = 0 ; i < nums.size() ; i++){
+            if(nums[i]&rightm) b = b ^ nums[i];
+            else c =  c^nums[i];
         }
-        return n;
+        return {b , c};
     }
 };
