@@ -1,20 +1,33 @@
 class Solution {
 public:
-bool isVowel(char ch) {
-    return std::string("aeiouAEIOU").find(ch) != std::string::npos;
-}
     string reverseVowels(string s) {
-        int i = 0;
-        int j = s.size()-1;
-        while(i <= j){
-        if(isVowel(s[i]) && isVowel(s[j])) {
-            swap(s[i] , s[j]);
-            i++;
-            j--;
+    
+        string word = s;
+        int start = 0;
+        int end = s.length() - 1;
+        string vowels = "aeiouAEIOU";
+        
+       
+        while (start < end) {
+           
+            while (start < end && vowels.find(word[start]) == string::npos) {
+                start++;
+            }
+            
+           
+            while (start < end && vowels.find(word[end]) == string::npos) {
+                end--;
+            }
+            
+           
+            swap(word[start], word[end]);
+            
+         
+            start++;
+            end--;
         }
-        else if (!isVowel(s[i]) && isVowel(s[j])) i++;
-        else j--;
-        }
-        return s;
+        
+     
+        return word;
     }
 };
