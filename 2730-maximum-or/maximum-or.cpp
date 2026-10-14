@@ -13,7 +13,7 @@ public:
         suffix[i] = suffix[i+1] | nums[i];
      }
      for(int i = 0 ; i < n ; i++){
-        res = max(res , prefix[i]|(nums[i]*p) | (nums[i]*p) | suffix[i+1]);
+        res = max(res , prefix[i]|(nums[i]*p) | suffix[i+1]);
      }
      return res;
     }
